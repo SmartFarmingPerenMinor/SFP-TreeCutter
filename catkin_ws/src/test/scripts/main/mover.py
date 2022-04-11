@@ -146,7 +146,7 @@ class endEffectorMover:
 
         if not promptContinue("[Enter] continue, or [X] shutdown: "):
             moveit_commander.roscpp_shutdown()
-        self.moveTo()
+        self.promptLocationAndMove()
         
 
     def visualizePlanning(self, plan) -> bool:
