@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-from modbusNode import modbusNode
+from modbusNode import ModbusNode
 
 
 ipAddress  = "10.42.0.2"
-node = modbusNode(ipAddress)
+node = ModbusNode(ipAddress)
