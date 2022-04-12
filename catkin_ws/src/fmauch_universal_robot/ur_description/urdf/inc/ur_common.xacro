@@ -215,5 +215,12 @@
     <xacro:property name="wrist_3_visual_material_color" value="${wrist_3_mesh['visual']['material']['color']}" scope="parent"/>
     <xacro:property name="wrist_3_collision_mesh" value="${wrist_3_mesh['collision']['mesh']}" scope="parent"/>
     <xacro:property name="wrist_3_visual_offset" value="${wrist_3_mesh['visual_offset']}" scope="parent"/>
+
+    <xacro:property name="ur_d435_mesh" value="${sec_mesh_files['ur_d435']}"/>
+    <xacro:property name="ur_d435_visual_mesh" value="${ur_d435_mesh['visual']['mesh']}" scope="parent"/>
+    <xacro:property name="ur_d435_visual_material_name" value="${ur_d435_mesh['visual']['material']['name']}" scope="parent"/>
+    <xacro:property name="ur_d435_visual_material_color" value="${ur_d435_mesh['visual']['material']['color']}" scope="parent"/>
+    <xacro:property name="ur_d435_visual_offset" value="${ur_d435_mesh['visual_offset']}" scope="parent"/>
+
   </xacro:macro>
 </robot>

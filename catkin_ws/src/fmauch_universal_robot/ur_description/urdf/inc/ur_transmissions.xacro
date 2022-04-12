@@ -68,6 +68,13 @@
       </actuator>
     </transmission>
 
+    <transmission name="${prefix}ur_d435_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${prefix}ur_d435_joint">
+        <hardwareInterface>${hw_interface}</hardwareInterface>
+      </joint>
+    </transmission>
+
   </xacro:macro>
 
 </robot>

@@ -53,7 +53,8 @@
 
   <xacro:include filename="$(find ur_description)/urdf/inc/ur_transmissions.xacro" />
   <xacro:include filename="$(find ur_description)/urdf/inc/ur_common.xacro" />
-  <xacro:include filename="$(find realsense2_description)/urdf/_d435.gazebo.xacro"/>
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435.urdf.xacro" />
+
 
 
   <xacro:macro name="ur_robot" params="
@@ -221,6 +222,22 @@
       </xacro:cylinder_inertial>
     </link>
 
+  <xacro:sensor_d435 name="camera_d435" topics_ns="camera_d435" parent="${prefix}wrist_3_link" publish_pointcloud="true">
+    <origin xyz="0 0 ${ur_d435_visual_offset}" rpy="${pi/2} 0 0" />
+  </xacro:sensor_d435>  
+    <!-- <link name="${prefix}ur_d435_link">
+      <visual>
+        <origin xyz="0 0 ${ur_d435_visual_offset}" rpy="${pi/2} 0 0"/>
+        <geometry>
+          <mesh filename="${ur_d435_visual_mesh}"/>
+        </geometry>
+        <material name="${ur_d435_visual_material_name}">
+          <color rgba="${ur_d435_visual_material_color}"/>
+        </material>
+      </visual>
+    </link> -->
+
+
     <!-- joints: main serial chain -->
     <joint name="${prefix}base_link-base_link_inertia" type="fixed">
       <parent link="${prefix}base_link" />
@@ -304,7 +321,12 @@
       </xacro:if>
       <dynamics damping="0" friction="0"/>
     </joint>
-
+    <!-- <joint name="${prefix}ur_d435_joint" type="fixed">
+      <parent link="${prefix}wrist_3_link" />
+      <child link="${prefix}ur_d435_link" />
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <axis xyz="0 0 1" />
+    </joint> -->
     <!-- ROS-Industrial 'base' frame: base_link to UR 'Base' Coordinates transform -->
     <link name="${prefix}base"/>
     <joint name="${prefix}base_link-base_fixed_joint" type="fixed">
@@ -334,5 +356,7 @@
       <parent link="${prefix}flange"/>
       <child link="${prefix}tool0"/>
     </joint>
+
+
   </xacro:macro>
 </robot>
