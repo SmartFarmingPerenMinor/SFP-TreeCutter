@@ -223,7 +223,7 @@
     </link>
 
   <xacro:sensor_d435 name="camera_d435" topics_ns="camera_d435" parent="${prefix}wrist_3_link" publish_pointcloud="true">
-    <origin xyz="0 0 ${ur_d435_visual_offset}" rpy="${pi/2} 0 0" />
+    <origin xyz="0 0 ${ur_d435_visual_offset}" rpy="${pi/2} ${-pi/2} 0" />
   </xacro:sensor_d435>  
     <!-- <link name="${prefix}ur_d435_link">
       <visual>

@@ -74,4 +74,4 @@ mesh_files:
       material:
         name: "LightGrey"
         color: "0.7 0.7 0.7 1.0"
-    visual_offset: -0.137
+    visual_offset: 0.02
