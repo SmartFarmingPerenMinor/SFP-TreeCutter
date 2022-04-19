@@ -13,6 +13,14 @@ ModbusMsg::ModbusMsg(const int8_t functionCode, const std::string hexDatastr)
     this->msg = hexDatastr;
 }
 
+void ModbusMsg::setMsg(const uint16_t address, const uint16_t count)
+{
+	this->mbMsg.addressH = (address & 0xFF00);
+	this->mbMsg.addressL = (address & 0x00FF);
+	this->mbMsg.countH = (count & 0xFF00);
+        this->mbMsg.countL = (count & 0x00FF);
+}
+
 void ModbusMsg::setError(const int8_t error, const std::string errorMsg)
 {
     this->error=true;
