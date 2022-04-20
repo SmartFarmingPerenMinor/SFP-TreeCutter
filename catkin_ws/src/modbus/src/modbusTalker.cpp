@@ -40,7 +40,7 @@ std::string ModbusTalker::sendMsg(std::string hexMsg)
 	errorMsg.append(std::strerror(errno));
         throw std::runtime_error(errorMsg);
     }
-    send(sock, hexMsg.c_str(), hexMsg.size() + 1, 0);
+    send(sock, hexMsg.c_str() + '\n', hexMsg.size() + 2, 0);
     read(sock, buffer, 1024);
     close(sock);
 
