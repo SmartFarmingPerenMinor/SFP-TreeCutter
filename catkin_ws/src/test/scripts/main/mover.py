@@ -21,10 +21,10 @@ from math import pi, tau, dist, fabs, cos, sin
 from moveit_commander.conversions import pose_to_list
 
 class endEffectorMover:
+    marker_id_counter = 0
     def __init__(self, arguments):
         # init commander / rospy node
 
-        rospy.init_node("move_group_python", disable_signals=True)
         moveit_commander.roscpp_initialize(arguments)
         
         # instantiate the robot
@@ -40,14 +40,18 @@ class endEffectorMover:
         self.max_tries: int = 30
         self.allowed_fraction: float = 0.95 # Between 0 and 1
             # Allow replanning to increase the odds of a solution
+
+        self.move_group.set_planning_pipeline_id("ompl")
+        self.move_group.set_planner_id("RRTConnect")
+
         self.move_group.allow_replanning(True)
         # self.move_group.allow_looking(True)
                 
         # Allow some leeway in position(meters) and orientation (radians)
         self.move_group.set_goal_position_tolerance(0.01)
         self.move_group.set_goal_orientation_tolerance(0.1)
-        self.move_group.set_num_planning_attempts(30)
-
+        self.move_group.set_num_planning_attempts(200)
+        self.move_group.set_planning_time(10)
         rospy.on_shutdown(self.move_group.stop)
         rospy.on_shutdown(self.move_group.clear_pose_targets)
         rospy.on_shutdown(mover_exit)
@@ -56,6 +60,10 @@ class endEffectorMover:
                 "/move_group/monitored_planning_scene",
                 DisplayTrajectory,
                 queue_size = 20,
+        )
+
+        self.marker_publisher = rospy.Publisher(
+            "/visualization_marker", Marker, queue_size=20,
         )
 
     def calcQuaternions(self, phi, theta, psi):
@@ -122,10 +130,11 @@ class endEffectorMover:
         move_group = self.move_group
 
         move_group.set_pose_target(pose_goal)
-        
-        plan = self.move_group.plan
+        # move_group.construct_motion_plan_request()
+        # plan = self.move_group.plan()
 
-        self.move(plan)
+        # self.move(plan)
+        move_group.go()
 
         if not prompt_continue("[Enter] continue, or [X] shutdown: "):
             rospy.signal_shutdown("Exit")
@@ -224,7 +233,7 @@ class endEffectorMover:
             print (point)
         self.move_to(point["x"], point["y"], point["z"])
 
-    def move(self, plan):
+    def move(self, plan: tuple):
         """Plan and execute as set up"""
         self.move_group.construct_motion_plan_request()
         # Plan the path, note: planning requires goal to be set.
@@ -290,6 +299,13 @@ class endEffectorMover:
         # publish it!
         self.marker_publisher.publish(marker)
         self.marker_id_counter += 1
+
+    def test_constraints(self):
+        pcm = self.create_simple_box_constraints()
+        path_constraints = Constraints()
+        path_constraints.position_constraints.append(pcm)
+        print(pcm)
+
 def prompt_continue(prompt_text: str):
     try:
         char = input(prompt_text)

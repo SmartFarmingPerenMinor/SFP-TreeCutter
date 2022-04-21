@@ -8,10 +8,14 @@ from camera import cameraViewer
 from depth_camera import depthViewer
 
 def main():
+
+    rospy.init_node("move_group_python", disable_signals=True)
     endEffectorMoverObject = endEffectorMover(sys.argv)
+    endEffectorMoverObject.test_constraints()
+    
     # depthViewerObject = depthViewer()
-    # endEffectorMoverObject.promptLocationAndMove()
-    endEffectorMoverObject.cartesian_path_execution()
+    endEffectorMoverObject.prompt_location()
+    # endEffectorMoverObject.cartesian_path_execution()
     
 if __name__ == "__main__":
     try: 
