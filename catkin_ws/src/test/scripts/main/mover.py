@@ -5,7 +5,7 @@ from typing import Tuple
 import rospy
 import moveit_commander
 #For vsc.. intellisense
-from moveit_commander import RobotCommander, PlanningSceneInterface, MoveGroupCommander
+from moveit_commander import RobotCommander, PlanningSceneInterface, MoveGroupCommander, RobotTrajectory
 from moveit_msgs.msg import DisplayTrajectory, PositionConstraint, OrientationConstraint, Constraints
 from geometry_msgs.msg import Pose, PoseStamped
 from std_msgs.msg import ColorRGBA
@@ -41,8 +41,8 @@ class endEffectorMover:
         self.allowed_fraction: float = 0.95 # Between 0 and 1
             # Allow replanning to increase the odds of a solution
 
-        self.move_group.set_planning_pipeline_id("ompl")
-        self.move_group.set_planner_id("RRTConnect")
+        # self.move_group.set_planning_pipeline_id("OMPLPlanner")
+        # self.move_group.set_planner_id("RRTConnect")
 
         self.move_group.allow_replanning(True)
         # self.move_group.allow_looking(True)
@@ -65,13 +65,6 @@ class endEffectorMover:
         self.marker_publisher = rospy.Publisher(
             "/visualization_marker", Marker, queue_size=20,
         )
-
-    def calcQuaternions(self, phi, theta, psi):
-        qw = cos(phi/2) * cos(theta/2) * cos(psi/2) + sin(phi/2) * sin(theta/2) * sin(psi/2)
-        qx = sin(phi/2) * cos(theta/2) * cos(psi/2) - cos(phi/2) * sin(theta/2) * sin(psi/2)
-        qy = cos(phi/2) * sin(theta/2) * cos(psi/2) + sin(phi/2) * cos(theta/2) * sin(psi/2)
-        qz = cos(phi/2) * cos(theta/2) * sin(psi/2) - sin(phi/2) * sin(theta/2) * cos(psi/2)
-        return qw, qx, qy, qz
 
     def printInfo(self):
 
@@ -115,7 +108,7 @@ class endEffectorMover:
         elif button.lower() == "h":
             self.move_group.set_named_target("home")
             plan = self.move_group.plan()
-            self.move(plan)
+            self.move(plan[0], plan[1])
             self.prompt_location()
 
     def move_to(self, x, y, z):
@@ -130,11 +123,9 @@ class endEffectorMover:
         move_group = self.move_group
 
         move_group.set_pose_target(pose_goal)
-        # move_group.construct_motion_plan_request()
-        # plan = self.move_group.plan()
+        plan = self.move_group.plan()
 
-        # self.move(plan)
-        move_group.go()
+        self.move(plan[0], plan[1])
 
         if not prompt_continue("[Enter] continue, or [X] shutdown: "):
             rospy.signal_shutdown("Exit")
@@ -218,10 +209,8 @@ class endEffectorMover:
             # If we have a complete plan, execute the trajectory
             if fraction > self.allowed_fraction:
                 rospy.loginfo("Path computed successfully. Moving the arm.")
-                self.move_group.execute(plan, wait=True)
-                rospy.sleep(1)
-                self.move_group.stop()
-                self.move_group.clear_pose_targets()
+                # plan_success = True because fraction already determines plan completion
+                self.move(True, plan)
 
                 rospy.loginfo("Path execution complete.")
             else:
@@ -233,12 +222,10 @@ class endEffectorMover:
             print (point)
         self.move_to(point["x"], point["y"], point["z"])
 
-    def move(self, plan: tuple):
+    def move(self, plan_success: bool, trajectory: RobotTrajectory):
         """Plan and execute as set up"""
         self.move_group.construct_motion_plan_request()
         # Plan the path, note: planning requires goal to be set.
-
-        plan_success: bool = plan[0]
 
         #check if the resulting path is valid and exit if not
         if plan_success == False:
@@ -249,62 +236,19 @@ class endEffectorMover:
         # self.visualizePlanning(plan)
         print("Executing planning: moving")
 
-        self.move_group.execute(plan, wait=True)
+        # plan[1] = RobotTrajectory
+        self.move_group.execute(trajectory, wait=True)
         rospy.sleep(1)
         self.move_group.stop()
         self.move_group.clear_pose_targets()
 
-    def create_simple_box_constraints(self):
-        pcm = PositionConstraint()
-        pcm.header.frame_id = self.move_group.get_pose_reference_frame()
-        pcm.link_name = self.move_group.get_end_effector_link()
+    def calcQuaternions(self, phi, theta, psi):
+        qw = cos(phi/2) * cos(theta/2) * cos(psi/2) + sin(phi/2) * sin(theta/2) * sin(psi/2)
+        qx = sin(phi/2) * cos(theta/2) * cos(psi/2) - cos(phi/2) * sin(theta/2) * sin(psi/2)
+        qy = cos(phi/2) * sin(theta/2) * cos(psi/2) + sin(phi/2) * cos(theta/2) * sin(psi/2)
+        qz = cos(phi/2) * cos(theta/2) * sin(psi/2) - sin(phi/2) * sin(theta/2) * cos(psi/2)
+        return qw, qx, qy, qz
 
-        cbox = SolidPrimitive()
-        cbox.type = SolidPrimitive.BOX
-        cbox.dimensions = [0.1, 0.4, 0.4]
-        pcm.constraint_region.primitives.append(cbox)
-
-        current_pose = self.move_group.get_current_pose()
-
-        cbox_pose = Pose()
-        cbox_pose.position.x = current_pose.pose.position.x
-        cbox_pose.position.y = 0.15
-        cbox_pose.position.z = 0.45
-        cbox_pose.orientation.w = 1.0
-        pcm.constraint_region.primitive_poses.append(cbox_pose)
-        self.display_box(cbox_pose, cbox.dimensions)
-
-        return pcm
-        
-    def display_box(self, pose, dimensions):
-        """ Utility function to visualize position constraints. """
-        assert len(dimensions) == 3
-
-        # setup cube / box marker type
-        marker = Marker()
-        marker.header.stamp = rospy.Time.now()
-        marker.ns = "/"
-        marker.id = self.marker_id_counter
-        marker.type = Marker.CUBE
-        marker.action = Marker.ADD
-        marker.color = ColorRGBA(0.0, 0.0, 0.0, 0.5)
-        marker.header.frame_id = self.move_group.get_pose_reference_frame()
-
-        # fill in user input
-        marker.pose = pose
-        marker.scale.x = dimensions[0]
-        marker.scale.y = dimensions[1]
-        marker.scale.z = dimensions[2]
-
-        # publish it!
-        self.marker_publisher.publish(marker)
-        self.marker_id_counter += 1
-
-    def test_constraints(self):
-        pcm = self.create_simple_box_constraints()
-        path_constraints = Constraints()
-        path_constraints.position_constraints.append(pcm)
-        print(pcm)
 
 def prompt_continue(prompt_text: str):
     try:

@@ -6,12 +6,12 @@ import rospy
 from mover import endEffectorMover
 from camera import cameraViewer
 from depth_camera import depthViewer
+from world import worldBuilder
 
 def main():
 
     rospy.init_node("move_group_python", disable_signals=True)
     endEffectorMoverObject = endEffectorMover(sys.argv)
-    endEffectorMoverObject.test_constraints()
     
     # depthViewerObject = depthViewer()
     endEffectorMoverObject.prompt_location()
