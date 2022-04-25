@@ -32,15 +32,15 @@ class worldBuilder:
 
         cbox = SolidPrimitive()
         cbox.type = SolidPrimitive.BOX
-        cbox.dimensions = [0.1, 0.4, 0.4]
+        cbox.dimensions = [3, 0.2, 3]
         pcm.constraint_region.primitives.append(cbox)
 
         current_pose = self.emo.move_group.get_current_pose()
 
         cbox_pose = Pose()
-        cbox_pose.position.x = current_pose.pose.position.x
-        cbox_pose.position.y = 0.15
-        cbox_pose.position.z = 0.45
+        cbox_pose.position.x = current_pose.pose.position.x - 0.05
+        cbox_pose.position.y = -0.3
+        cbox_pose.position.z = 0
         cbox_pose.orientation.w = 1.0
         pcm.constraint_region.primitive_poses.append(cbox_pose)
         self.display_box(cbox_pose, cbox.dimensions)

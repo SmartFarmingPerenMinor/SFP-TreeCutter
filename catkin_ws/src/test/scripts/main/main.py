@@ -10,11 +10,13 @@ from world import worldBuilder
 
 def main():
 
-    rospy.init_node("move_group_python", disable_signals=True)
+    rospy.init_node("main_py", disable_signals=True)
     endEffectorMoverObject = endEffectorMover(sys.argv)
-    
+    worldBuilderObject = worldBuilder(endEffectorMoverObject)
+    worldBuilderObject.test_constraints()
+    worldBuilderObject.addPlane("ground_plane")
     # depthViewerObject = depthViewer()
-    endEffectorMoverObject.prompt_location()
+    # endEffectorMoverObject.prompt_location()
     # endEffectorMoverObject.cartesian_path_execution()
     
 if __name__ == "__main__":
