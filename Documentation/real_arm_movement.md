@@ -49,6 +49,7 @@ Once Rviz has booted up, add the motion planner.
 ![add_robot](./Images/add_robot.png)
 Attach the base_link fixed frame to set the orientation and planner space.
 ![fix_frame](./Images/fix_frame.png)
+
 You should see the arm and if all has been set up correctly, it should be reflective of the arm's current actual state.
 
 ### Moving the arm using Rviz
