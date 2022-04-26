@@ -44,7 +44,7 @@ roslaunch ur10e_moveit_config moveit_rviz.launch config:=true limited:=true&
 Add image steps to setup the arm perception in Rviz
 
 Once Rviz has booted up, add the motion planner.
-![alt text](https://github.com/SmartFarmingPerenMinor/SFP-TreeCutter/tree/master/Documentation/Images/add_robot.png?raw=true)
+![add_robot](https://github.com/SmartFarmingPerenMinor/SFP-TreeCutter/tree/master/Documentation/Images/add_robot.png)
 Attach the base_link fixed frame to set the orientation and planner space.
 You should see the arm and if all has been set up correctly, it should be reflective of the arm's current actual state.
 
