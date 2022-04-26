@@ -3,7 +3,7 @@
 source /opt/ros/noetic/setup.bash
 source ./catkin_ws/devel/setup.bash
 
-path_calibration=`pwd`"/my_robot_calibration.yaml"
+path_calibration=`pwd`"/configs/my_robot_calibration.yaml"
 
 if [ -z "$1" ]
 then
