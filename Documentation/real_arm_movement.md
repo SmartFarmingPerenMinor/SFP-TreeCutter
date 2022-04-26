@@ -12,8 +12,10 @@ This is a testplan written for the real UR10e
 BEFORE WE BEGIN, ALWAYS, ALWAYS have someone ready to press the EMERGENCY STOP button.
 
 ### Installation of steps
-Once you've cloned this repo, run the install script. [link](https://github.com/SmartFarmingPerenMinor/SFP-TreeCutter/master/install.sh)
-We use the ur_robot_driver package from Universal_Robots [link](https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/tree/master/ur_robot_driver)
+Once you've cloned this repo, run the [install script](https://github.com/SmartFarmingPerenMinor/SFP-TreeCutter/master/install.sh).
+
+We use the ur_robot_driver package from [Universal_Robots](https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/tree/master/ur_robot_driver).
+
 ALWAYS source catkin_ws/devel/setup.bash whenever you open a new terminal.
 
 #### Starting up
@@ -46,14 +48,18 @@ Add image steps to setup the arm perception in Rviz
 Once Rviz has booted up, add the motion planner.
 ![add_robot](./Images/add_robot.png)
 Attach the base_link fixed frame to set the orientation and planner space.
+![fix_frame](./Images/fix_frame.png)
 You should see the arm and if all has been set up correctly, it should be reflective of the arm's current actual state.
 
 ### Moving the arm using Rviz
 
 Set the planning group from end_effector to manipulator.
+![change_planning](./Images/change_planning.png)
 This gives access to a transform bauble, which can be used to manipulate the planner.
+![show_bauble](./Images/show_bauble.png)
 Press Plan & Execute to move the arm towards the planner.
 If it fails, it may mean the joint limits have been exceeded.
+![planner_limits](./Images/planner_limits.png)
 Always check if the connection is still active.
 
 ### Moving the arm using code
