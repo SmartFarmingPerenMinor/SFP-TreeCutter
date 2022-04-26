@@ -8,9 +8,9 @@ add_compile_options(-std=c++11)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  rospy
   roscpp
   std_msgs
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -47,11 +47,11 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
+add_message_files(
+  FILES
+  read_coil.msg
 #   Message2.msg
-# )
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -68,10 +68,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-# )
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -81,7 +81,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## package, follow these steps:
 ## * In the file package.xml:
 ##   * add a build_depend and a exec_depend tag for "dynamic_reconfigure"
-## * In this file (CMakeLists.txt):
+## * In this file (CMakeLists.txt):x
 ##   * add "dynamic_reconfigure" to
 ##     find_package(catkin REQUIRED COMPONENTS ...)
 ##   * uncomment the "generate_dynamic_reconfigure_options" section below
@@ -105,7 +105,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES modbus
-  CATKIN_DEPENDS rospy std_msgs roscpp
+  CATKIN_DEPENDS std_msgs roscpp message_runtime
 #  DEPENDS system_lib
 )
 
@@ -132,11 +132,11 @@ add_library(
   src/modbusTalker.cpp
 )
 
-add_library(
-  modbusTranslator
-  include/modbus/modbusMsg.hpp
-  src/modbus/modbusMsg.cpp
-)
+#add_library(
+#  modbusTranslator
+#  include/modbus/modbusMsg.hpp
+#  src/modbus/modbusMsg.cpp
+#)
 
 
 ## Add cmake target dependencies of the library
