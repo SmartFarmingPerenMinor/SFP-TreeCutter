@@ -18,7 +18,9 @@ BEFORE WE BEGIN, ALWAYS, ALWAYS have someone ready to press the EMERGENCY STOP b
 ### Installation of steps
 Follow the main repository's README to install the environment.
 We use the ur_robot_driver package from [Universal_Robots](https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/tree/master/ur_robot_driver).
+
 And our testing package [test](https://github.com/SmartFarmingPerenMinor/SFP-TreeCutter/tree/master/catkin_ws/src/test)
+
 ALWAYS source catkin_ws/devel/setup.bash whenever you open a new terminal.
 
 #### Starting up
