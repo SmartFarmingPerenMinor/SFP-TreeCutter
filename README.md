@@ -22,16 +22,16 @@ Currently we can:
 - Visualize an octomap from the real environment 
 
 Interfaces:
-ROS: The core of our project. Learn about ROS to get started on development.
-RViz: Visualize the robot's perception. Allows for easier debugging, rather than consulting numbers and metrics.
-Gazebo: Simulation tool. Has options for physics and more.
+- ROS: The core of our project. Learn about ROS to get started on development.
+- RViz: Visualize the robot's perception. Allows for easier debugging, rather than consulting numbers and metrics.
+- Gazebo: Simulation tool. Has options for physics and more.
 
 Libraries:
-MoveIt!: Solves motion planning.
+- MoveIt!: Solves motion planning.
 
 Requirements:
-Ubuntu [20.04](https://ubuntu.com/download/desktop/thank-you?version=20.04.4&architecture=amd64)
+- Ubuntu [20.04](https://ubuntu.com/download/desktop/thank-you?version=20.04.4&architecture=amd64)
 
 Recommended:
-Run Ubuntu natively. VMWare can be laggy and unstable.
-Consult the ROS wiki.
+- Run Ubuntu natively. VMWare can be laggy and unstable.
+- Consult the ROS wiki.
