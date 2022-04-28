@@ -21,7 +21,7 @@ ALWAYS source catkin_ws/devel/setup.bash whenever you open a new terminal.
 #### Starting up
 
 To set up the program, move to dir SFP-TreeCutter:
-(To get the connection and calibration working, refer to !!!TODO!!![link](https://github.com/SmartFarmingPerenMinor/SFP-TreeCutter/tree/master/Documentation)
+(To get the connection and calibration working, refer to !!!TODO!!![link](https://github.com/SmartFarmingPerenMinor/SFP-TreeCutter/tree/master/Documentation))
 
 Open terminal:
 ```bash
@@ -29,6 +29,7 @@ source catkin_ws/devel/setup.bash
 ./start_connection.sh <robot_ip_address> 
 
 ```
+<robot_ip_address> is optional. It has a default value set.
 It is not recommended to run the ./start_connection.sh in parallel, so as to end the process with CTRL + C / CTRL + Z
 
 Once connected, start a new terminal and run:
@@ -39,12 +40,8 @@ roslaunch ur10e_moveit_config moveit_rviz.launch config:=true limited:=true
 ```
 If you want to run it in parallel, add an & to the command like so.
 ```bash
-roslaunch ur10e_moveit_config moveit_rviz.launch config:=true limited:=true&
+roslaunch ur10e_moveit_config moveit_rviz.launch config:=true limited:=true &
 ```
-
-!!!TODO!!!
-Add image steps to setup the arm perception in Rviz
-
 Once Rviz has booted up, add the motion planner.
 ![add_robot](./Images/add_robot.png)
 Attach the base_link fixed frame to set the orientation and planner space.
@@ -87,5 +84,5 @@ Waypoints are set in meters.
 
 #### Start criteria
 - Has the connection been set properly?
-- Does Rviz reflect the arm's current state?
+- Does Rviz correctly reflect the arm's current state?
 - Does the arm move to the planned point?
