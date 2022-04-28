@@ -8,14 +8,17 @@ This is a testplan written for the real UR10e
 - Rviz visualizes the UR10e
 - Moving the UR10e
 
+## Not to be tested
+- Smooth planning
+- Settings for movement
+
 ## Testing
 BEFORE WE BEGIN, ALWAYS, ALWAYS have someone ready to press the EMERGENCY STOP button.
 
 ### Installation of steps
-Once you've cloned this repo, run the [install script](https://github.com/SmartFarmingPerenMinor/SFP-TreeCutter/master/install.sh)(if you haven't already).
-
+Follow the main repository's README to install the environment.
 We use the ur_robot_driver package from [Universal_Robots](https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/tree/master/ur_robot_driver).
-
+And our testing package [test](https://github.com/SmartFarmingPerenMinor/SFP-TreeCutter/tree/master/catkin_ws/src/test)
 ALWAYS source catkin_ws/devel/setup.bash whenever you open a new terminal.
 
 #### Starting up
@@ -42,12 +45,12 @@ If you want to run it in parallel, add an & to the command like so.
 ```bash
 roslaunch ur10e_moveit_config moveit_rviz.launch config:=true limited:=true &
 ```
-Once Rviz has booted up, add the motion planner.
+This should boot up Rviz. Once it has booted up, add the motion planner.
 ![add_robot](./Images/add_robot.png)
 Attach the base_link fixed frame to set the orientation and planner space.
 ![fix_frame](./Images/fix_frame.png)
 
-You should see the arm and if all has been set up correctly, it should be reflective of the arm's current actual state.
+You should see the arm represented in Rviz and if all has been set up correctly, it should be reflective of the arm's current actual state.
 
 ### Moving the arm using Rviz
 
@@ -87,4 +90,6 @@ Waypoints are set in meters.
 - Does Rviz correctly reflect the arm's current state?
 
 #### End criteria
+- Can you move the planner around?
 - Does the arm move to the planned point?
+
