@@ -12,7 +12,7 @@ This is a testplan written for the real UR10e
 BEFORE WE BEGIN, ALWAYS, ALWAYS have someone ready to press the EMERGENCY STOP button.
 
 ### Installation of steps
-Once you've cloned this repo, run the [install script](https://github.com/SmartFarmingPerenMinor/SFP-TreeCutter/master/install.sh).
+Once you've cloned this repo, run the [install script](https://github.com/SmartFarmingPerenMinor/SFP-TreeCutter/master/install.sh)(if you haven't already).
 
 We use the ur_robot_driver package from [Universal_Robots](https://github.com/UniversalRobots/Universal_Robots_ROS_Driver/tree/master/ur_robot_driver).
 
