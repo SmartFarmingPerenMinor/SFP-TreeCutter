@@ -21,7 +21,7 @@ ALWAYS source catkin_ws/devel/setup.bash whenever you open a new terminal.
 #### Starting up
 
 To set up the program, move to dir SFP-TreeCutter:
-(To get the connection and calibration working, refer to !!!TODO!!![link](https://github.com/SmartFarmingPerenMinor/SFP-TreeCutter/tree/master/Documentation))
+(To get the connection and calibration working, refer to [start connection](https://github.com/SmartFarmingPerenMinor/SFP-TreeCutter/tree/master/Documentation/start_connection.md))
 
 Open terminal:
 ```bash
@@ -85,4 +85,6 @@ Waypoints are set in meters.
 #### Start criteria
 - Has the connection been set properly?
 - Does Rviz correctly reflect the arm's current state?
+
+#### End criteria
 - Does the arm move to the planned point?
