@@ -11,6 +11,3 @@
 *.lai
 *.la
 *.a
-
-octomap_server/docs
-octomap_server/src/octomap_server
