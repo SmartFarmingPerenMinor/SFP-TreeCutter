@@ -29,4 +29,4 @@ sudo apt-get install librealsense2-dkms librealsense2-utils librealsense2-dev li
 sudo apt-get update && sudo apt-get upgrade -y 
 
 sudo rosdep init && rosdep update
-rosdep install --from-paths src --ignore-src -y
+rosdep install --from-paths catkin_ws/src --ignore-src -y
