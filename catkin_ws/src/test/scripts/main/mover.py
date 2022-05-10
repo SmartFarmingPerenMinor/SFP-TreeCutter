@@ -66,6 +66,8 @@ class endEffectorMover:
             "/visualization_marker", Marker, queue_size=20,
         )
 
+        print(self.move_group.get_current_pose())
+
     def printInfo(self):
 
         planning_frame = self.move_group.get_planning_frame()
@@ -111,7 +113,7 @@ class endEffectorMover:
             self.move(plan[0], plan[1])
             self.prompt_location()
 
-    def move_to(self, x, y, z):
+    def move_to(self, x, y, z, getInput: bool=True):
         """Move to quaternion space pose goal"""
         pose_goal = Pose()
         pose_goal.orientation.w = 1.0
@@ -126,10 +128,11 @@ class endEffectorMover:
         plan = self.move_group.plan()
 
         self.move(plan[0], plan[1])
-
-        if not prompt_continue("[Enter] continue, or [X] shutdown: "):
-            rospy.signal_shutdown("Exit")
-        self.prompt_location()
+        
+        if (getInput):
+            if not prompt_continue("[Enter] continue, or [X] shutdown: "):
+                rospy.signal_shutdown("Exit")
+            self.prompt_location()
         
 
     def visualize_planning(self, plan) -> bool:
