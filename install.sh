@@ -30,4 +30,4 @@ sudo apt-get install ros-noetic-realsense2-camera -y
 sudo apt-get update && sudo apt-get upgrade -y 
 
 sudo rosdep init && rosdep update
-rosdep install --from-paths catkin_ws/src --ignore-src -y
+rosdep install --from-paths catkin_ws/src --ignore-src --rosdistro=noetic -y
