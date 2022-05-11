@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import time
+from datetime import datetime
 import sys
 import rospy
 
@@ -34,3 +35,9 @@ if __name__ == "__main__":
 
     print("\n\nprinting benchmarks results: ")
     print(benchmarks)
+    
+    fd = open("benchmarkResult.txt", 'a')
+    for i in range(0, len(benchmarks)):
+        logMsg = f"data {datetime.today().strftime('%Y-%m-%d')} {datetime.timedelta(seconds=666}: {benchmarks[1]}"
+        fd.write(logMsg)
+    fd.close()
