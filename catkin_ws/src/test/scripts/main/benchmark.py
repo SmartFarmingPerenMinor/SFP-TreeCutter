@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 import sys
 import rospy
 
@@ -21,23 +21,23 @@ def main():
 
 if __name__ == "__main__":
     benchmarks = []
-    for i in 10
-    try: 
-        if not rospy.is_shutdown():
-                #startTime = time.time()
-                main()
-                #endTime = time.time()
-                #benchmark = {"timeID":i + 1, "time":(endTime-startTime)}
-                #benchmarks.append(benchmark)
+    for i in range(10):
+        try: 
+            if not rospy.is_shutdown():
+                    startTime = time.time()
+                    main()
+                    endTime = time.time()
+                    benchmark = {"timeID":i + 1, "time":(endTime-startTime)}
+                    benchmarks.append(benchmark)
 
-    except rospy.ROSInterruptException:
-        rospy.loginfo("Process interrupted!")
+        except rospy.ROSInterruptException:
+            rospy.loginfo("Process interrupted!")
 
     print("\n\nprinting benchmarks results: ")
     print(benchmarks)
     
     fd = open("benchmarkResult.txt", 'a')
     for i in range(0, len(benchmarks)):
-        logMsg = f"data {datetime.today().strftime('%Y-%m-%d')} {datetime.timedelta(seconds=666}: {benchmarks[1]}"
+        logMsg = f"data {datetime.today().strftime('%Y-%m-%d')} {timedelta(seconds=666)}: {benchmarks[i]}\n"
         fd.write(logMsg)
     fd.close()
