@@ -66,7 +66,6 @@ class endEffectorMover:
             "/visualization_marker", Marker, queue_size=20,
         )
 
-        print(self.move_group.get_current_pose())
 
     def printInfo(self):
 
