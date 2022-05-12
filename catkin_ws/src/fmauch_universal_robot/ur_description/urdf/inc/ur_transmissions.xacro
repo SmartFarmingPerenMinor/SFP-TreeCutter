@@ -68,9 +68,9 @@
       </actuator>
     </transmission>
 
-    <transmission name="${prefix}ur_d435_trans">
+    <transmission name="${prefix}ur_d415_trans">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="${prefix}ur_d435_joint">
+      <joint name="${prefix}ur_d415_joint">
         <hardwareInterface>${hw_interface}</hardwareInterface>
       </joint>
     </transmission>

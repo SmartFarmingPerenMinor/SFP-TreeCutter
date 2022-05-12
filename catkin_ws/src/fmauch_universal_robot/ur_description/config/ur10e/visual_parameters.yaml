@@ -68,9 +68,9 @@ mesh_files:
       mesh: "package://ur_description/meshes/ur10e/collision/wrist3.stl"
     visual_offset: -0.1168
   
-  ur_d435:
+  ur_d415:
     visual:
-      mesh: "package://realsense2_description/meshes/d435.dae"
+      mesh: "package://realsense2_description/meshes/d415.dae"
       material:
         name: "LightGrey"
         color: "0.7 0.7 0.7 1.0"

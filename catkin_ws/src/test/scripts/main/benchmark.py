@@ -9,16 +9,44 @@ from mover import endEffectorMover
 from camera import cameraViewer
 from depth_camera import depthViewer
 from world import worldBuilder
+"""
+  position: 
+    x: 0.12432091289173712
+    y: 0.5199326845855795
+    z: 0.5404726440432062
+  orientation: 
+    x: 0.5643447768776021
+    y: 0.7249470756015347
+    z: 0.1987028229978667
+    w: 0.34129737549596056
+"""
+
+"""  
+  position: 
+    x: 0.15053777838975663
+    y: 0.42005508485776083
+    z: 1.1709618143256848
+  orientation: 
+    x: -0.6770049105444241
+    y: -0.5902159792009894
+    z: -0.4376494503671559
+    w: 0.04209997135248066
+"""
+
+
 
 def main(endEffectorMoverObject: endEffectorMover):
+    # print(endEffectorMoverObject.move_group.get_current_pose(endEffectorMoverObject.move_group.get_end_effector_link()))
+    
     # move to home position
-    endEffectorMoverObject.move_to(-0.7094929255872758, 0.6859538724164436, 0.8130753580446348, False)
+    endEffectorMoverObject.set_waypoints_manual(0.12432091289173712, 0.5199326845855795, 0.5404726440432062, 0.34129737549596056)
     #move to predefined point
-    endEffectorMoverObject.move_to(0.2846635174250878, 0.7970207115848729, 0.5420001587584037, False)
-
+    endEffectorMoverObject.set_waypoints_manual(0.15053777838975663, 0.42005508485776083, 1.1709618143256848, 0.04209997135248066)
+    
+    
 if __name__ == "__main__":
     benchmarks = []
-    rospy.init_node("move_group_python", disable_signals=True)
+    rospy.init_node("benchmark", disable_signals=True)
     endEffectorMoverObject = endEffectorMover(sys.argv)
     for i in range(10):
         try: 

@@ -14,8 +14,8 @@ def main():
     endEffectorMoverObject = endEffectorMover(sys.argv)
     
     # depthViewerObject = depthViewer()
-    endEffectorMoverObject.prompt_location()
-    # endEffectorMoverObject.cartesian_path_execution()
+    # endEffectorMoverObject.prompt_location()
+    endEffectorMoverObject.cartesian_path_execution()
     
 if __name__ == "__main__":
     try: 

@@ -2,6 +2,8 @@
 
 from copy import deepcopy
 from typing import Tuple
+
+from matplotlib.pyplot import get
 import rospy
 import moveit_commander
 #For vsc.. intellisense
@@ -182,16 +184,51 @@ class endEffectorMover:
             except ValueError:
                 print("Invalid input")
         
+    def set_waypoints_manual(self, x: float, y: float, z: float, w: float):
+        # Get the name of the end-effector link
+        end_effector_link = self.move_group.get_end_effector_link()
 
-    def cartesian_path_execution(self):
+        # Get the current pose so we can add it as a waypoint
+        start_pose = self.move_group.get_current_pose(end_effector_link).pose
+        start_pose.orientation.w = 1
+
+        # Initialize the waypoints list
+        self.waypoints = []
+
+        # Set the first waypoint to be the starting pose
+        # Append the pose to the waypoints list << For some reason this breaks the program.
+        # waypoints.append(start_pose) # << Try it if you wish.
+
+        wpose = deepcopy(start_pose)
+        # self.waypoints.append(start_pose)
+        #Split the waypoints into segments to generate a better path through shorter distances.
+        splits = 10
+        x = (x - start_pose.position.x) / splits
+        y = (y - start_pose.position.y) / splits
+        z = (z - start_pose.position.y) / splits
+        # w = (w - start_pose.orientation.w) / splits
+        
+        for _ in range(splits):
+            wpose.position.x += x
+            wpose.position.y += y
+            wpose.position.z += z
+            # wpose.orientation.w += w
+            self.waypoints.append(deepcopy(wpose))
+        
+        self.cartesian_path_execution(False)
+        
+    def cartesian_path_execution(self, getInput:bool = True):
 
         fraction: float = 0.0
         attempts: int = 0
 
-        self.set_waypoints()
+        if getInput:
+            self.set_waypoints()
 
-        if not prompt_continue("Waypoints planned. [Enter] to execute, [X] to abort."):
-            rospy.signal_shutdown("Exit")
+        if getInput:
+            if not prompt_continue("Waypoints planned. [Enter] to execute, [X] to abort."):
+                rospy.signal_shutdown("Exit")
+                return
 
         # Plan the Cartesian path connecting the waypoints
         while fraction < 1.0 and attempts < self.max_tries:
@@ -226,7 +263,7 @@ class endEffectorMover:
 
     def move(self, plan_success: bool, trajectory: RobotTrajectory):
         """Plan and execute as set up"""
-        self.move_group.construct_motion_plan_request()
+        # self.move_group.construct_motion_plan_request()
         # Plan the path, note: planning requires goal to be set.
 
         #check if the resulting path is valid and exit if not
