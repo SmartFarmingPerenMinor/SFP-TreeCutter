@@ -205,7 +205,7 @@ class endEffectorMover:
         splits = 10
         x = (x - start_pose.position.x) / splits
         y = (y - start_pose.position.y) / splits
-        z = (z - start_pose.position.y) / splits
+        z = (z - start_pose.position.z) / splits
         # w = (w - start_pose.orientation.w) / splits
         
         for _ in range(splits):
