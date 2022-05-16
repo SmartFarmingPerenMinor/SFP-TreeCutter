@@ -6,7 +6,8 @@ This is a testplan written for the real UR10e
 
 ## To be tested
 - Rviz visualizes the UR10e
-- Moving the UR10e
+- Moving the UR10e using RViz
+- Moving the UR10e using our code
 
 ## Not to be tested
 - Smooth planning
@@ -37,14 +38,21 @@ source catkin_ws/devel/setup.bash
 <robot_ip_address> is optional. It has a default value set.
 It is not recommended to run the ./start_connection.sh in parallel, so as to end the process with CTRL + C / CTRL + Z
 
-Once connected, start a new terminal and run:
+Once connected, 
+start two new terminals and run:
+```bash
+source catkin_ws/devel/setup.bash
+roslaunch ur10e_moveit_config ur10e_moveit_planning_execution.launch
+```
+
 ```bash
 source catkin_ws/devel/setup.bash
 roslaunch ur10e_moveit_config moveit_rviz.launch config:=true limited:=true
-
 ```
+
 If you want to run it in parallel, add an & to the command like so.
 ```bash
+roslaunch ur10e_moveit_config ur10e_moveit_planning_execution.launch &
 roslaunch ur10e_moveit_config moveit_rviz.launch config:=true limited:=true &
 ```
 This should boot up Rviz. Once it has booted up, add the motion planner.
