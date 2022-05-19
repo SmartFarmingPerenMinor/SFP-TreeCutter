@@ -7,6 +7,7 @@ from mover import endEffectorMover
 from camera import cameraViewer
 from depth_camera import depthViewer
 from world import worldBuilder
+from benchmark import Benchmark
 
 def main():
 
@@ -16,7 +17,9 @@ def main():
     # depthViewerObject = depthViewer()
     # endEffectorMoverObject.prompt_location()
     endEffectorMoverObject.cartesian_path_execution()
-    
+    #bmark = Benchmark(endEffectorMoverObject)
+    #bmark.vLine()
+
 if __name__ == "__main__":
     try: 
         while not rospy.is_shutdown():
