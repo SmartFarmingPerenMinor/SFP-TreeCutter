@@ -1,0 +1,20 @@
+digraph G {
+"base" -> "tool0_controller"[label=" Broadcaster: /ur_hardware_interface\nAverage rate: 500.111\nBuffer length: 5.007\nMost recent transform: 1653293218.723\nOldest transform: 1653293213.716\n"];
+"base_link" -> "base"[label=" Broadcaster: /robot_state_publisher\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base_link" -> "base_link_inertia"[label=" Broadcaster: /robot_state_publisher\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"flange" -> "tool0"[label=" Broadcaster: /robot_state_publisher\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"wrist_3_link" -> "flange"[label=" Broadcaster: /robot_state_publisher\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"wrist_2_link" -> "wrist_3_link"[label=" Broadcaster: /robot_state_publisher\nAverage rate: 47.526\nBuffer length: 4.945\nMost recent transform: 1653293218.676\nOldest transform: 1653293213.732\n"];
+"camera_link" -> "camera_depth_frame"[label=" Broadcaster: /camera/realsense2_camera_manager\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"wrist_3_link" -> "camera_link"[label=" Broadcaster: /static_transform_publisher_1653293155561584533\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"camera_depth_frame" -> "camera_depth_optical_frame"[label=" Broadcaster: /camera/realsense2_camera_manager\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"upper_arm_link" -> "forearm_link"[label=" Broadcaster: /robot_state_publisher\nAverage rate: 47.526\nBuffer length: 4.945\nMost recent transform: 1653293218.676\nOldest transform: 1653293213.732\n"];
+"shoulder_link" -> "upper_arm_link"[label=" Broadcaster: /robot_state_publisher\nAverage rate: 47.526\nBuffer length: 4.945\nMost recent transform: 1653293218.676\nOldest transform: 1653293213.732\n"];
+"base_link_inertia" -> "shoulder_link"[label=" Broadcaster: /robot_state_publisher\nAverage rate: 47.526\nBuffer length: 4.945\nMost recent transform: 1653293218.676\nOldest transform: 1653293213.732\n"];
+"forearm_link" -> "wrist_1_link"[label=" Broadcaster: /robot_state_publisher\nAverage rate: 47.526\nBuffer length: 4.945\nMost recent transform: 1653293218.676\nOldest transform: 1653293213.732\n"];
+"wrist_1_link" -> "wrist_2_link"[label=" Broadcaster: /robot_state_publisher\nAverage rate: 47.526\nBuffer length: 4.945\nMost recent transform: 1653293218.676\nOldest transform: 1653293213.732\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1653293218.7575574"[ shape=plaintext ] ;
+}->"base_link";
+}
