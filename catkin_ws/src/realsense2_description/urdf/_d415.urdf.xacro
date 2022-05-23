@@ -8,9 +8,6 @@ aluminum peripherial evaluation case.
 -->
 
 <robot name="sensor_d415" xmlns:xacro="http://ros.org/wiki/xacro">
-<!--File includes-->
-  <xacro:include filename="$(find realsense2_description)/urdf/_d415.gazebo.xacro"/>
-
   <xacro:macro name="sensor_d415" params="name:=camera topics_ns:=camera parent *origin publish_pointcloud:=true">
     <xacro:property name="M_PI" value="3.1415926535897931" />
 

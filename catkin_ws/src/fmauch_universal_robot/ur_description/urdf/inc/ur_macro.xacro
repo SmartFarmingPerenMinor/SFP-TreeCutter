@@ -55,8 +55,6 @@
   <xacro:include filename="$(find ur_description)/urdf/inc/ur_common.xacro" />
   <xacro:include filename="$(find realsense2_description)/urdf/_d415.urdf.xacro" />
 
-
-
   <xacro:macro name="ur_robot" params="
     prefix
     joint_limits_parameters_file
@@ -220,12 +218,13 @@
       <xacro:cylinder_inertial radius="${wrist_3_inertia_radius}" length="${wrist_3_inertia_length}"  mass="${wrist_3_mass}">
         <origin xyz="0.0 0.0 ${-0.5 * wrist_3_inertia_length}" rpy="0 0 0" />
       </xacro:cylinder_inertial>
+      <xacro:sensor_d415 name="camera_d415" topics_ns="camera_d415" parent="${prefix}wrist_3_link" publish_pointcloud="true">
+        <origin xyz="0 0 ${ur_d415_visual_offset}" rpy="${pi/2} ${-pi/2} 0" />
+      </xacro:sensor_d415>  
     </link>
 
-  <xacro:sensor_d415 name="camera_d415" topics_ns="camera_d415" parent="${prefix}wrist_3_link" publish_pointcloud="true">
-    <origin xyz="0 0 ${ur_d415_visual_offset}" rpy="${pi/2} ${-pi/2} 0" />
-  </xacro:sensor_d415>  
-    <!-- <link name="${prefix}ur_d415_link">
+
+    <!-- <link name="${prefix}ur_d435_link">
       <visual>
         <origin xyz="0 0 ${ur_d415_visual_offset}" rpy="${pi/2} 0 0"/>
         <geometry>
