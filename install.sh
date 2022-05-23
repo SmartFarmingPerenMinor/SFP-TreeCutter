@@ -29,5 +29,5 @@ sudo apt-get install librealsense2-dkms librealsense2-utils librealsense2-dev li
 sudo apt-get install ros-noetic-realsense2-camera -y
 sudo apt-get update && sudo apt-get upgrade -y 
 
-sudo rosdep init && rosdep update
+cd catkin_ws && sudo rosdep init && rosdep update
 rosdep install --from-paths catkin_ws/src --ignore-src --rosdistro=noetic -y
