@@ -13,6 +13,8 @@ Both of these test will use the following resolutions of the octomapping softwar
 - 1cm
 - 5mm
 
+The attempted frame rate (/max setting in RVIZ) is 30. Meaning the computer won't have render higher than this.
+
 The scenario's will be tested and results will be appended in this document aswell.
 ## GPU Test's
 **Prerequisits**
