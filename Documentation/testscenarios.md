@@ -17,80 +17,82 @@ The attempted frame rate (/max setting in RVIZ) is 30. Meaning the computer won'
 
 The scenario's will be tested and results will be appended in this document aswell.
 ## GPU Test's
-**Prerequisits**
+#### Prerequisits
 For all these test's the computer will run the program on the graphical processing unit.
+
 ### 5cm scenario
-**Prerequisits**
+#### Prerequisits
 The Octomapping has been set to 5cm resolution for the blocks
 
-**Results**
+#### Results
 
 ### 4cm scenario
-**Prerequisits**
+#### Prerequisits
 The Octomapping has been set to 4cm resolution for the blocks
 
-**Results**
+#### Results
 
 ### 3cm scenario
-**Prerequisits**
+#### Prerequisits
 The Octomapping has been set to 3cm resolution for the blocks
 
-**Results**
+#### Results
 
 ### 2cm scenario
-**Prerequisits**
+#### Prerequisits
 The Octomapping has been set to 2cm resolution for the blocks
 
-**Results**
+#### Results
 
 ### 1cm scenario
-**Prerequisits**
+#### Prerequisits
 The Octomapping has been set to 1cm resolution for the blocks
 
-**Results**
+#### Results
 
 ### 5mm scenario
-**Prerequisits**
+#### Prerequisits
 The Octomapping has been set to 5mm resolution for the blocks
 
-**Results**
+#### Results
 
 
 ## CPU Test's
-**Prerequisits**
+#### Prerequisits
 For all these test's the computer will run the program on the central processing unit.
+
 ### 5cm scenario
-**Prerequisits**
+#### Prerequisits
 The Octomapping has been set to 5cm resolution for the blocks
 
-**Results**
+#### Results
 
 ### 4cm scenario
-**Prerequisits**
+#### Prerequisits
 The Octomapping has been set to 4cm resolution for the blocks
 
-**Results**
+#### Results
 
 ### 3cm scenario
-**Prerequisits**
+#### Prerequisits
 The Octomapping has been set to 3cm resolution for the blocks
 
-**Results**
+#### Results
 
 ### 2cm scenario
-**Prerequisits**
+#### Prerequisits
 The Octomapping has been set to 2cm resolution for the blocks
 
-**Results**
+#### Results
 
 ### 1cm scenario
-**Prerequisits**
+#### Prerequisits
 The Octomapping has been set to 1cm resolution for the blocks
 
-**Results**
+#### Results
 
 ### 5mm scenario
-**Prerequisits**
+#### Prerequisits
 The Octomapping has been set to 5mm resolution for the blocks
 
-**Results**
+#### Results
