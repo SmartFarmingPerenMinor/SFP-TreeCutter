@@ -43,7 +43,7 @@
   <arg name="stopped_controllers" default="joint_group_pos_controller" doc="Controllers that are initally loaded, but not started."/>
 
   <!-- robot_state_publisher configuration -->
-  <arg name="tf_prefix" default="ur10edefaultprefix" doc="tf_prefix used for the robot."/>
+  <arg name="tf_prefix" default="" doc="tf_prefix used for the robot."/>
   <arg name="tf_pub_rate" default="500" doc="Rate at which robot_state_publisher should publish transforms."/>
 
   <!-- Gazebo parameters -->
