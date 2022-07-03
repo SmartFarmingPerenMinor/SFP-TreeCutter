@@ -1,8 +1,13 @@
 sensors:
   - sensor_plugin: occupancy_map_monitor/PointCloudOctomapUpdater
+<<<<<<< HEAD
     point_cloud_topic: /camera_d415/depth/color/points
+=======
+    point_cloud_topic: /camera/depth/color/points
+>>>>>>> 4f8b85be7fe24420da5d8abf1631f8f50c858fb8
     max_range: 5.0
     point_subsample: 1
     padding_offset: 0.1
     padding_scale: 1.0
+    max_update_rate: 1.0
     filtered_cloud_topic: filtered_cloud

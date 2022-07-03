@@ -5,6 +5,6 @@
 source /opt/ros/noetic/setup.bash
 source ./catkin_ws/devel/setup.bash
 
-roslaunch ur_gazebo ur10e_bringup.launch limited:=false &
+roslaunch ur_gazebo ur10e_bringup.launch &
 sleep 8
 
